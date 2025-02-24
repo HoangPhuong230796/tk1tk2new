@@ -10,12 +10,14 @@
         .hidden { display: none; }
         .correct { color: green; }
         .incorrect { color: red; }
+        #result { margin-top: 20px; font-weight: bold; }
     </style>
 </head>
 <body>
     <div id="quiz-container"></div>
     <button id="load-more">Hiển thị thêm</button>
     <button id="submit">Nộp bài</button>
+    <p id="result" class="hidden"></p>
     <script>
         let questions = [];
         let currentIndex = 0;
@@ -73,6 +75,8 @@
                 }
                 answerDiv.classList.remove('hidden');
             });
+            document.getElementById('result').textContent = `Kết quả: ${correct} đúng, ${incorrect} sai, ${unanswered} chưa chọn.`;
+            document.getElementById('result').classList.remove('hidden');
             alert(`Kết quả: ${correct} đúng, ${incorrect} sai, ${unanswered} chưa chọn.`);
         });
 
