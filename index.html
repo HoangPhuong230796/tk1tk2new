@@ -48,7 +48,7 @@
                     <label><input type="radio" name="q${i}" value="B"> ${q.answer_B}</label><br>
                     <label><input type="radio" name="q${i}" value="C"> ${q.answer_C}</label><br>
                     <label><input type="radio" name="q${i}" value="D"> ${q.answer_D}</label>
-                    <p class='hidden' id='answer-${i}'>Đáp án đúng: <b>${q.correct_answer}</b></p>`;
+                    <p class='hidden answer' id='answer-${i}'>Đáp án đúng: <b>${q.correct_answer}</b></p>`;
                 container.appendChild(div);
             }
             currentIndex += batchSize;
@@ -62,22 +62,25 @@
             questions.forEach((q, i) => {
                 const selected = document.querySelector(`input[name='q${i}']:checked`);
                 const answerDiv = document.getElementById(`answer-${i}`);
-                if (selected) {
-                    if (selected.value === q.correct_answer) {
-                        correct++;
-                        answerDiv.classList.add('correct');
+                if (answerDiv) {
+                    answerDiv.classList.remove('hidden');
+                    if (selected) {
+                        if (selected.value === q.correct_answer) {
+                            correct++;
+                            answerDiv.classList.add('correct');
+                        } else {
+                            incorrect++;
+                            answerDiv.classList.add('incorrect');
+                        }
                     } else {
-                        incorrect++;
-                        answerDiv.classList.add('incorrect');
+                        unanswered++;
                     }
-                } else {
-                    unanswered++;
                 }
-                answerDiv.classList.remove('hidden');
             });
-            document.getElementById('result').textContent = `Kết quả: ${correct} đúng, ${incorrect} sai, ${unanswered} chưa chọn.`;
+            const resultText = `Kết quả: ${correct} đúng, ${incorrect} sai, ${unanswered} chưa chọn.`;
+            document.getElementById('result').textContent = resultText;
             document.getElementById('result').classList.remove('hidden');
-            alert(`Kết quả: ${correct} đúng, ${incorrect} sai, ${unanswered} chưa chọn.`);
+            setTimeout(() => alert(resultText), 100);
         });
 
         loadQuestions();
