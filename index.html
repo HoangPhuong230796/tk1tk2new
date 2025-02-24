@@ -8,9 +8,10 @@
         body { font-family: Arial, sans-serif; }
         .question { margin-bottom: 20px; }
         .hidden { display: none; }
-        .correct { color: green; }
-        .incorrect { color: red; }
-        #result { margin-top: 20px; font-weight: bold; }
+        .correct { color: green; font-weight: bold; }
+        .incorrect { color: red; font-weight: bold; }
+        .answer { font-size: 18px; }
+        #result { margin-top: 20px; font-weight: bold; font-size: 20px; color: blue; }
     </style>
 </head>
 <body>
@@ -43,7 +44,7 @@
                 const q = questions[i];
                 const div = document.createElement('div');
                 div.className = 'question';
-                div.innerHTML = `<p>${i + 1}. ${q.question}</p>
+                div.innerHTML = `<p><b>${i + 1}. ${q.question}</b></p>
                     <label><input type="radio" name="q${i}" value="A"> ${q.answer_A}</label><br>
                     <label><input type="radio" name="q${i}" value="B"> ${q.answer_B}</label><br>
                     <label><input type="radio" name="q${i}" value="C"> ${q.answer_C}</label><br>
